@@ -1,0 +1,56 @@
+{
+  "manifestVersion": 2,
+  "execution": "trusted-worker",
+  "id": "youtrack-tasks",
+  "name": "YouTrack Tasks",
+  "version": "0.1.0",
+  "description": "Lists your YouTrack issues in a sidebar panel and starts an agent on one in a new worktree.",
+  "repository": "https://github.com/salihkilic/orca_youtrack_plugin",
+  "engines": {
+    "orca": ">=1.4.264"
+  },
+  "pluginApi": 1,
+  "main": "worker/main.mjs",
+  "contributes": {
+    "panels": [
+      {
+        "id": "issues",
+        "title": "YouTrack",
+        "icon": "flag",
+        "entry": "src/panel.tsx",
+        "ui": "components"
+      }
+    ],
+    "settings": [
+      {
+        "key": "apiUrl",
+        "title": "YouTrack URL",
+        "description": "Your YouTrack address, e.g. https://youtrack.example.com. /api is added when missing. The panel asks for it on first use.",
+        "type": "string",
+        "default": ""
+      },
+      {
+        "key": "query",
+        "title": "Issue query",
+        "description": "YouTrack search query for the issues the panel lists. The panel's \"Assigned to me\" checkbox adds for: me.",
+        "type": "string",
+        "default": "#Unresolved"
+      },
+      {
+        "key": "agent",
+        "title": "Agent",
+        "description": "The agent Start launches in the new workspace.",
+        "type": "string",
+        "default": "claude"
+      }
+    ]
+  },
+  "capabilities": [
+    { "kind": "settings:own" },
+    { "kind": "storage:own" },
+    { "kind": "secrets:own" },
+    { "kind": "workspace:read" },
+    { "kind": "workspace:create" },
+    { "kind": "agent:launch" }
+  ]
+}
